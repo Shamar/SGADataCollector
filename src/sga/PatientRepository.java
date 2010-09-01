@@ -6,42 +6,35 @@
 package sga;
 import java.util.Enumeration;
 import java.util.Hashtable;
-
 /**
  *
  * @author gtesio
  */
 public class PatientRepository {
-    private Hashtable _collection;
+    private Patient[] _collection;
     public PatientRepository()
     {
-        _collection = new Hashtable();
+        _collection = new Patient[0];
     }
 
     public int getSize()
     {
-        return _collection.size();
+        return _collection.length;
     }
 
     public void createPatient(String name)
     {
         Patient newPatient = new Patient(name);
-        _collection.put(name, newPatient);
+        Patient[] collection = new Patient[_collection.length + 1];
+        for(int i = 0 ; i< _collection.length; ++i)
+            collection[i] = _collection[i];
+        collection[_collection.length] = newPatient;
     }
 
-    public void removePatient(String name)
-    {
-        _collection.remove(name);
-    }
-
-    public Enumeration getPatientsNames()
-    {
-        return _collection.keys();
-    }
-
-    public Patient getPatient(String name)
-    {
-        return (Patient)_collection.get(name);
+    public Patient getPatient(int index) {
+        if(index < 0 || index >= _collection.length)
+            return null;
+        return _collection[index];
     }
 
 }

@@ -5,31 +5,31 @@
 
 package sga;
 
-import java.util.Enumeration;
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
 
 /**
  * @author gtesio
  */
-public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
+public class SGADataCollectorMIDlet extends MIDlet {
 
     private boolean midletPaused = false;
-    private PatientRepository _repository;
+    private ApplicationController _application;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Command exitCommand;
+    private Command okCommand;
     private Command itemCommand;
-    private List list;
+    private Command backCommand;
+    private Form form;
+    private TextField textField;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
      * The SGADataCollectorMIDlet constructor.
      */
     public SGADataCollectorMIDlet() {
-        _repository = new PatientRepository();
-        _repository.createPatient("Giacomo Tesio");
-        _repository.createPatient("Sara Bertolotto");
+        _application = new ApplicationController(getOkCommand(), getBackCommand());
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -53,7 +53,8 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
-        switchDisplayable(null, getList());//GEN-LINE:|3-startMIDlet|1|3-postAction
+        switchDisplayable(null, _application.getViewToShow());
+//GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
     //</editor-fold>//GEN-END:|3-startMIDlet|2|
@@ -64,7 +65,8 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      */
     public void resumeMIDlet() {//GEN-END:|4-resumeMIDlet|0|4-preAction
         // write pre-action user code here
-        switchDisplayable(null, getList());//GEN-LINE:|4-resumeMIDlet|1|4-postAction
+        switchDisplayable(null, _application.getViewToShow());
+//GEN-LINE:|4-resumeMIDlet|1|4-postAction
         // write post-action user code here
     }//GEN-BEGIN:|4-resumeMIDlet|2|
     //</editor-fold>//GEN-END:|4-resumeMIDlet|2|
@@ -87,101 +89,119 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
 
-
-        // write pre-action user code here
-
-                // write pre-action user code here
-
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|67-getter|0|67-preInit
     /**
      * Returns an initiliazed instance of exitCommand component.
      * @return the initialized component instance
      */
     public Command getExitCommand() {
-        if (exitCommand == null) {//GEN-END:|18-getter|0|18-preInit
+        if (exitCommand == null) {//GEN-END:|67-getter|0|67-preInit
             // write pre-init user code here
-            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|18-getter|1|18-postInit
+            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|67-getter|1|67-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|18-getter|2|
+        }//GEN-BEGIN:|67-getter|2|
         return exitCommand;
     }
-    //</editor-fold>//GEN-END:|18-getter|2|
+    //</editor-fold>//GEN-END:|67-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: commandAction for Displayables ">//GEN-BEGIN:|7-commandAction|0|7-preCommandAction
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|68-getter|0|68-preInit
     /**
-     * Called by a system to indicated that a command has been invoked on a particular displayable.
-     * @param command the Command that was invoked
-     * @param displayable the Displayable where the command was invoked
-     */
-    public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
-        // write pre-action user code here
-        if (displayable == list) {//GEN-BEGIN:|7-commandAction|1|54-preAction
-            if (command == List.SELECT_COMMAND) {//GEN-END:|7-commandAction|1|54-preAction
-                // write pre-action user code here
-                listAction();//GEN-LINE:|7-commandAction|2|54-postAction
-                // write post-action user code here
-            } else if (command == exitCommand) {//GEN-LINE:|7-commandAction|3|58-preAction
-                // write pre-action user code here
-//GEN-LINE:|7-commandAction|4|58-postAction
-                // write post-action user code here
-            } else if (command == itemCommand) {//GEN-LINE:|7-commandAction|5|60-preAction
-                // write pre-action user code here
-//GEN-LINE:|7-commandAction|6|60-postAction
-                // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
-        }//GEN-END:|7-commandAction|7|7-postCommandAction
-        // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|8|
-    //</editor-fold>//GEN-END:|7-commandAction|8|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: list ">//GEN-BEGIN:|53-getter|0|53-preInit
-    /**
-     * Returns an initiliazed instance of list component.
+     * Returns an initiliazed instance of okCommand component.
      * @return the initialized component instance
      */
-    public List getList() {
-        if (list == null) {//GEN-END:|53-getter|0|53-preInit
+    public Command getOkCommand() {
+        if (okCommand == null) {//GEN-END:|68-getter|0|68-preInit
             // write pre-init user code here
-            list = new List("Pazienti", Choice.IMPLICIT);//GEN-BEGIN:|53-getter|1|53-postInit
-            list.addCommand(getExitCommand());
-            list.addCommand(getItemCommand());
-            list.setCommandListener(this);//GEN-END:|53-getter|1|53-postInit
+            okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|68-getter|1|68-postInit
             // write post-init user code here
-            Enumeration names = _repository.getPatientsNames();
-            int i = 0;
-            while(names.hasMoreElements())
-                list.append((String)names.nextElement(), null);
-        }//GEN-BEGIN:|53-getter|2|
-        return list;
+        }//GEN-BEGIN:|68-getter|2|
+        return okCommand;
     }
-    //</editor-fold>//GEN-END:|53-getter|2|
+    //</editor-fold>//GEN-END:|68-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: listAction ">//GEN-BEGIN:|53-action|0|53-preAction
-    /**
-     * Performs an action assigned to the selected list element in the list component.
-     */
-    public void listAction() {//GEN-END:|53-action|0|53-preAction
-        // enter pre-action user code here
-        String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-LINE:|53-action|1|53-postAction
-        // enter post-action user code here
-    }//GEN-BEGIN:|53-action|2|
-    //</editor-fold>//GEN-END:|53-action|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: itemCommand ">//GEN-BEGIN:|59-getter|0|59-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: itemCommand ">//GEN-BEGIN:|69-getter|0|69-preInit
     /**
      * Returns an initiliazed instance of itemCommand component.
      * @return the initialized component instance
      */
     public Command getItemCommand() {
-        if (itemCommand == null) {//GEN-END:|59-getter|0|59-preInit
+        if (itemCommand == null) {//GEN-END:|69-getter|0|69-preInit
             // write pre-init user code here
-            itemCommand = new Command("Nuovo", Command.ITEM, 0);//GEN-LINE:|59-getter|1|59-postInit
+            itemCommand = new Command("Item", Command.ITEM, 0);//GEN-LINE:|69-getter|1|69-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|59-getter|2|
+        }//GEN-BEGIN:|69-getter|2|
         return itemCommand;
     }
-    //</editor-fold>//GEN-END:|59-getter|2|
+    //</editor-fold>//GEN-END:|69-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand ">//GEN-BEGIN:|70-getter|0|70-preInit
+    /**
+     * Returns an initiliazed instance of backCommand component.
+     * @return the initialized component instance
+     */
+    public Command getBackCommand() {
+        if (backCommand == null) {//GEN-END:|70-getter|0|70-preInit
+            // write pre-init user code here
+            backCommand = new Command("Back", Command.BACK, 0);//GEN-LINE:|70-getter|1|70-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|70-getter|2|
+        return backCommand;
+    }
+    //</editor-fold>//GEN-END:|70-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|71-getter|0|71-preInit
+    /**
+     * Returns an initiliazed instance of form component.
+     * @return the initialized component instance
+     */
+    public Form getForm() {
+        if (form == null) {//GEN-END:|71-getter|0|71-preInit
+            // write pre-init user code here
+            form = new Form("form", new Item[] { getTextField() });//GEN-LINE:|71-getter|1|71-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|71-getter|2|
+        return form;
+    }
+    //</editor-fold>//GEN-END:|71-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|72-getter|0|72-preInit
+    /**
+     * Returns an initiliazed instance of textField component.
+     * @return the initialized component instance
+     */
+    public TextField getTextField() {
+        if (textField == null) {//GEN-END:|72-getter|0|72-preInit
+            // write pre-init user code here
+            textField = new TextField("Nome", "Prova", 64, TextField.ANY);//GEN-LINE:|72-getter|1|72-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|72-getter|2|
+        return textField;
+    }
+    //</editor-fold>//GEN-END:|72-getter|2|
+
+
+        // write pre-action user code here
+
+                // write pre-action user code here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // write pre-init user code here
+
+            // write post-init user code here
+
     //</editor-fold>
 
 
