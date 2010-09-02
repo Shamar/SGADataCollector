@@ -7,29 +7,23 @@ package sga;
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
+import sga.controllers.ApplicationController;
 
 /**
  * @author gtesio
  */
-public class SGADataCollectorMIDlet extends MIDlet {
+public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
 
     private boolean midletPaused = false;
-    private ApplicationController _application;
+    private Controller _controller;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
-    private Command exitCommand;
-    private Command okCommand;
-    private Command itemCommand;
-    private Command backCommand;
-    private Form form;
-    private TextField textField;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
      * The SGADataCollectorMIDlet constructor.
      */
     public SGADataCollectorMIDlet() {
-        _application = new ApplicationController(getOkCommand(), getBackCommand());
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -53,7 +47,9 @@ public class SGADataCollectorMIDlet extends MIDlet {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
-        switchDisplayable(null, _application.getViewToShow());
+        _controller = new ApplicationController();
+        switchDisplayable(null, _controller.getView());
+        _controller.getView().setCommandListener(this);
 //GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
@@ -65,7 +61,7 @@ public class SGADataCollectorMIDlet extends MIDlet {
      */
     public void resumeMIDlet() {//GEN-END:|4-resumeMIDlet|0|4-preAction
         // write pre-action user code here
-        switchDisplayable(null, _application.getViewToShow());
+        switchDisplayable(null, _controller.getView());
 //GEN-LINE:|4-resumeMIDlet|1|4-postAction
         // write post-action user code here
     }//GEN-BEGIN:|4-resumeMIDlet|2|
@@ -88,122 +84,6 @@ public class SGADataCollectorMIDlet extends MIDlet {
         // write post-switch user code here
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|67-getter|0|67-preInit
-    /**
-     * Returns an initiliazed instance of exitCommand component.
-     * @return the initialized component instance
-     */
-    public Command getExitCommand() {
-        if (exitCommand == null) {//GEN-END:|67-getter|0|67-preInit
-            // write pre-init user code here
-            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|67-getter|1|67-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|67-getter|2|
-        return exitCommand;
-    }
-    //</editor-fold>//GEN-END:|67-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|68-getter|0|68-preInit
-    /**
-     * Returns an initiliazed instance of okCommand component.
-     * @return the initialized component instance
-     */
-    public Command getOkCommand() {
-        if (okCommand == null) {//GEN-END:|68-getter|0|68-preInit
-            // write pre-init user code here
-            okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|68-getter|1|68-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|68-getter|2|
-        return okCommand;
-    }
-    //</editor-fold>//GEN-END:|68-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: itemCommand ">//GEN-BEGIN:|69-getter|0|69-preInit
-    /**
-     * Returns an initiliazed instance of itemCommand component.
-     * @return the initialized component instance
-     */
-    public Command getItemCommand() {
-        if (itemCommand == null) {//GEN-END:|69-getter|0|69-preInit
-            // write pre-init user code here
-            itemCommand = new Command("Item", Command.ITEM, 0);//GEN-LINE:|69-getter|1|69-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|69-getter|2|
-        return itemCommand;
-    }
-    //</editor-fold>//GEN-END:|69-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand ">//GEN-BEGIN:|70-getter|0|70-preInit
-    /**
-     * Returns an initiliazed instance of backCommand component.
-     * @return the initialized component instance
-     */
-    public Command getBackCommand() {
-        if (backCommand == null) {//GEN-END:|70-getter|0|70-preInit
-            // write pre-init user code here
-            backCommand = new Command("Back", Command.BACK, 0);//GEN-LINE:|70-getter|1|70-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|70-getter|2|
-        return backCommand;
-    }
-    //</editor-fold>//GEN-END:|70-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|71-getter|0|71-preInit
-    /**
-     * Returns an initiliazed instance of form component.
-     * @return the initialized component instance
-     */
-    public Form getForm() {
-        if (form == null) {//GEN-END:|71-getter|0|71-preInit
-            // write pre-init user code here
-            form = new Form("form", new Item[] { getTextField() });//GEN-LINE:|71-getter|1|71-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|71-getter|2|
-        return form;
-    }
-    //</editor-fold>//GEN-END:|71-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|72-getter|0|72-preInit
-    /**
-     * Returns an initiliazed instance of textField component.
-     * @return the initialized component instance
-     */
-    public TextField getTextField() {
-        if (textField == null) {//GEN-END:|72-getter|0|72-preInit
-            // write pre-init user code here
-            textField = new TextField("Nome", "Prova", 64, TextField.ANY);//GEN-LINE:|72-getter|1|72-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|72-getter|2|
-        return textField;
-    }
-    //</editor-fold>//GEN-END:|72-getter|2|
-
-
-        // write pre-action user code here
-
-                // write pre-action user code here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // write pre-init user code here
-
-            // write post-init user code here
-
-    //</editor-fold>
-
 
     /**
      * Returns a display instance.
@@ -248,6 +128,26 @@ public class SGADataCollectorMIDlet extends MIDlet {
      * @param unconditional if true, then the MIDlet has to be unconditionally terminated and all resources has to be released.
      */
     public void destroyApp(boolean unconditional) {
+    }
+
+    public void commandAction(Command c, Displayable d) {
+        
+        _controller = _controller.apply(c, d);
+        if(null != _controller)
+        {
+            Displayable oldDisplay = this.getDisplay().getCurrent();
+            Displayable newDisplay = _controller.getView();
+            if(newDisplay != oldDisplay)
+            {
+                oldDisplay.setCommandListener(null);
+                newDisplay.setCommandListener(this);
+                switchDisplayable(null, newDisplay);
+            }
+        }
+        else
+        {
+            exitMIDlet();
+        }
     }
 
 }

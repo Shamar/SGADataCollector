@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package sga;
+package sga.views;
 
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.List;

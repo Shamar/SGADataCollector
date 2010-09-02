@@ -3,7 +3,8 @@
  * and open the template in the editor.
  */
 
-package sga;
+package sga.domain;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 /**
@@ -22,13 +23,13 @@ public class PatientRepository {
         return _collection.length;
     }
 
-    public void createPatient(String name)
+    public void addPatient(Patient newPatient)
     {
-        Patient newPatient = new Patient(name);
         Patient[] collection = new Patient[_collection.length + 1];
-        for(int i = 0 ; i< _collection.length; ++i)
+        for(int i = 0 ; i < _collection.length; ++i)
             collection[i] = _collection[i];
         collection[_collection.length] = newPatient;
+        _collection = collection;
     }
 
     public Patient getPatient(int index) {

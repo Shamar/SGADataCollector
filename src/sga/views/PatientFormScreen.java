@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package sga;
+package sga.views;
 
+import sga.domain.*;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.TextField;
 
@@ -26,5 +27,9 @@ public class PatientFormScreen extends Form {
     {
         return _nameField.getString();
     }
-
+    
+    public void setName(String name)
+    {
+        _nameField.setString(name);
+    }
 }
