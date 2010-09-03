@@ -12,11 +12,11 @@ package sga.domain;
 public class BodyMeasure {
 
     private int _percentile; 
-    private double _centimeter;
-    public BodyMeasure(int percentile, double centimeter)
+    private double _value;
+    public BodyMeasure(int percentile, double value)
     {
         _percentile = percentile;
-        _centimeter = centimeter;
+        _value = value;
     }
 
     public int getPercentile()
@@ -26,6 +26,6 @@ public class BodyMeasure {
 
     public double getCentimeter()
     {
-        return _centimeter;
+        return _value;
     }
 }
