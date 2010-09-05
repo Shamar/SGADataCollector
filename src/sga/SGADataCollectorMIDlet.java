@@ -18,6 +18,8 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
     private Controller _controller;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
+    private Form form;
+    private ChoiceGroup choiceGroup;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -84,6 +86,38 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
         // write post-switch user code here
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|52-getter|0|52-preInit
+    /**
+     * Returns an initiliazed instance of form component.
+     * @return the initialized component instance
+     */
+    public Form getForm() {
+        if (form == null) {//GEN-END:|52-getter|0|52-preInit
+            // write pre-init user code here
+            form = new Form("form", new Item[] { getChoiceGroup() });//GEN-LINE:|52-getter|1|52-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|52-getter|2|
+        return form;
+    }
+    //</editor-fold>//GEN-END:|52-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: choiceGroup ">//GEN-BEGIN:|53-getter|0|53-preInit
+    /**
+     * Returns an initiliazed instance of choiceGroup component.
+     * @return the initialized component instance
+     */
+    public ChoiceGroup getChoiceGroup() {
+        if (choiceGroup == null) {//GEN-END:|53-getter|0|53-preInit
+            // write pre-init user code here
+            choiceGroup = new ChoiceGroup("", Choice.MULTIPLE);//GEN-BEGIN:|53-getter|1|53-postInit
+            choiceGroup.append("Choice Element 1", null);
+            choiceGroup.setSelectedFlags(new boolean[] { false });//GEN-END:|53-getter|1|53-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|53-getter|2|
+        return choiceGroup;
+    }
+    //</editor-fold>//GEN-END:|53-getter|2|
 
     /**
      * Returns a display instance.

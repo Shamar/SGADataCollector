@@ -5,6 +5,7 @@
 package sga.domain;
 
 import java.util.Date;
+import java.util.Enumeration;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Patient {
     private Parent _mother;
     private Parent _father;
     private Checkup[] _checkups;
+    private DiagnosticTest[] _diagnosticTests;
 
     private BodyMeasure _mph;
 
@@ -105,6 +107,41 @@ public class Patient {
                 }
             _riskFactors = newValue;
         }
+    }
+
+    public boolean getDiagnosticTestsResult(DiagnosticTest test)
+    {
+        for(int i = 0; i < _diagnosticTests.length; ++i)
+            if(_diagnosticTests[i] == test)
+                return true;
+        return false;
+    }
+
+    public void addDiagnosticTest(DiagnosticTest test)
+    {
+        DiagnosticTest[] newValue = new DiagnosticTest[_diagnosticTests.length + 1];
+        for(int i = 0; i < _diagnosticTests.length; ++i)
+        {
+            if(_diagnosticTests[i] == test)
+                return;
+            newValue[i] = _diagnosticTests[i];
+        }
+        newValue[_diagnosticTests.length] = test;
+        _diagnosticTests = newValue;
+    }
+
+    public void removeDiagnosticTest(DiagnosticTest test)
+    {
+        DiagnosticTest[] newValue = new DiagnosticTest[_diagnosticTests.length - 1];
+        int j = 0;
+        for(int i = 0; i < _diagnosticTests.length; ++i)
+            if(_diagnosticTests[i] != test)
+            {
+                if(j < newValue.length)
+                    newValue[j++] = _diagnosticTests[i];
+            }
+        if(j < _diagnosticTests.length)
+            _diagnosticTests = newValue;
     }
 
     public String getName()
