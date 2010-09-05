@@ -24,7 +24,7 @@ public class BodyMeasure {
         return _percentile;
     }
 
-    public double getCentimeter()
+    public double getValue()
     {
         return _value;
     }

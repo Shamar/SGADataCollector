@@ -54,14 +54,14 @@ public class ApplicationController implements Controller {
             Patient newPatient = new Patient();
             user.getRepository().addPatient(newPatient);
             user.setSelectedPatient(newPatient);
-            return new PatientFirstController();
+            return new PatientController();
         }
         if(c == List.SELECT_COMMAND)
         {
             int index = _view.getSelectedIndex();
             Patient selected = user.getRepository().getPatient(index);
             user.setSelectedPatient(selected);
-            return new PatientFirstController();
+            return new PatientController();
         }
         return this;
     }
