@@ -68,6 +68,8 @@ public final class PatientForm extends Form {
 
     public BodyMeasure getMph()
     {
+        if(_mphCentile == null || _mphValue == null || _mphCentile.getString().length() == 0 || _mphValue.getString().length() == 0 )
+            return null;
         return new BodyMeasure(Integer.parseInt(_mphCentile.getString()),
                                Double.parseDouble(_mphValue.getString()));
     }

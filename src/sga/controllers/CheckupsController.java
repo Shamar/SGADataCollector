@@ -15,9 +15,11 @@ import sga.Controller;
  * @author giacomo
  */
 public class CheckupsController implements Controller {
+    private static Command _nextCmd = new Command("Nuova", Command.SCREEN, 60);
+    private static Command _prevCmd = new Command("Indietro", Command.BACK, 60);
 
     public Displayable getView() {
-        return new List("", List.IMPLICIT);
+        return new List("Visite", List.IMPLICIT);
     }
 
     public Controller apply(Command c, Displayable d) {

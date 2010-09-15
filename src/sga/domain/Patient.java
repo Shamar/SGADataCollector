@@ -84,7 +84,7 @@ public class Patient {
 
     public void addRiskFactor(RiskFactor riskFactor)
     {
-        if(occurred(riskFactor))
+        if(!occurred(riskFactor))
         {
             RiskFactor[] newValue = new RiskFactor[_riskFactors.length + 1];
             for(int i = 0; i < _riskFactors.length; ++i)
@@ -183,9 +183,9 @@ public class Patient {
      * @return the _father
      */
     public Parent getFather() {
-        if(null == _mother)
+        if(null == _father)
         {
-            _mother = new Parent();
+            _father = new Parent();
         }
         return _father;
     }
