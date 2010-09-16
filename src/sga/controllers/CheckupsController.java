@@ -9,6 +9,9 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.List;
 import sga.Controller;
+import sga.domain.Patient;
+import sga.domain.User;
+import sga.views.CheckupView;
 
 /**
  *
@@ -18,11 +21,32 @@ public class CheckupsController implements Controller {
     private static Command _nextCmd = new Command("Nuova", Command.SCREEN, 60);
     private static Command _prevCmd = new Command("Indietro", Command.BACK, 60);
 
+    private CheckupView _view;
+
     public Displayable getView() {
-        return new List("Visite", List.IMPLICIT);
+        if(null != _view)
+            return _view;
+        return buildCheckupList();
+    }
+
+    private List buildCheckupList()
+    {
+        List l = new List("Visite", List.IMPLICIT);
+
+        return l;
     }
 
     public Controller apply(Command c, Displayable d) {
+
+        Patient selected = User.getInstance().getSelectedPatient();
+
+        if(c == List.SELECT_COMMAND)
+        {
+            List l = (List)d;
+            selected.getCheckup(l.getSelectedIndex());
+            
+        }
+
         return new MenuController();
     }
 
