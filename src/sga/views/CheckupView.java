@@ -73,28 +73,28 @@ public class CheckupView extends Form {
      * @return the _dosage
      */
     public double getDosage() {
-        return _dosage;
+        return 0;
     }
 
     /**
      * @param dosage the _dosage to set
      */
     public void setDosage(double dosage) {
-        this._dosage = dosage;
+        //this._dosage = dosage;
     }
 
     /**
      * @return the _enterPuberty
      */
     public boolean inPuberty() {
-        return _inPuberty;
+        return false;
     }
 
     /**
      * @param enterPuberty the _enterPuberty to set
      */
     public void enterPuberty() {
-        this._inPuberty = true;
+        //this._inPuberty = true;
     }
 
 }
