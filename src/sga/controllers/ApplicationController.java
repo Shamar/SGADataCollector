@@ -30,7 +30,6 @@ public class ApplicationController implements Controller {
         PatientRepository repository = User.getInstance().getRepository();
         for(int i = 0; i < repository.getSize(); ++i)
         {
-            _view.setTitle("AA");
             _view.append(repository.getPatient(i).getName(), null);
         }
         

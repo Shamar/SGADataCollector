@@ -26,6 +26,7 @@ public class Patient {
     public Patient()
     {
         _riskFactors = new RiskFactor[0];
+        _diagnosticTests = new DiagnosticTest[0];
     }
 
     public Checkup newCheckup()
@@ -98,14 +99,22 @@ public class Patient {
     {
         if(occurred(riskFactor))
         {
+            if(_riskFactors.length == 0)
+                return;
             RiskFactor[] newValue = new RiskFactor[_riskFactors.length - 1];
             int j = 0;
+            boolean removed = false;
             for(int i = 0; i < _riskFactors.length; ++i)
                 if(_riskFactors[i] != riskFactor)
                 {
                     newValue[j++] = _riskFactors[i];
                 }
-            _riskFactors = newValue;
+                else
+                {
+                    removed = true;
+                }
+            if(removed)
+                _riskFactors = newValue;
         }
     }
 
@@ -119,7 +128,8 @@ public class Patient {
 
     public void addDiagnosticTest(DiagnosticTest test)
     {
-        DiagnosticTest[] newValue = new DiagnosticTest[_diagnosticTests.length + 1];
+        DiagnosticTest[] newValue;
+        newValue = new DiagnosticTest[_diagnosticTests.length + 1];
         for(int i = 0; i < _diagnosticTests.length; ++i)
         {
             if(_diagnosticTests[i] == test)
@@ -132,15 +142,24 @@ public class Patient {
 
     public void removeDiagnosticTest(DiagnosticTest test)
     {
+        if(_diagnosticTests.length == 0)
+            return;
         DiagnosticTest[] newValue = new DiagnosticTest[_diagnosticTests.length - 1];
         int j = 0;
+        boolean removed = false;
         for(int i = 0; i < _diagnosticTests.length; ++i)
+        {
             if(_diagnosticTests[i] != test)
             {
                 if(j < newValue.length)
                     newValue[j++] = _diagnosticTests[i];
             }
-        if(j < _diagnosticTests.length)
+            else
+            {
+                removed = true;
+            }
+        }
+        if(removed)
             _diagnosticTests = newValue;
     }
 

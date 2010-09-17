@@ -19,8 +19,9 @@ import sga.views.CheckupView;
  * @author giacomo
  */
 public class CheckupsController implements Controller {
-    private static Command _nextCmd = new Command("Nuova", Command.SCREEN, 60);
-    private static Command _prevCmd = new Command("Indietro", Command.BACK, 60);
+    private static Command _newCmd = new Command("Nuova", Command.SCREEN, 60);
+    private static Command _prevCmd = new Command("Menù", Command.BACK, 60);
+    private static Command _doneCmd = new Command("Fatto", Command.SCREEN, 60);
 
     private Checkup _selectedCheckup;
 
@@ -34,8 +35,14 @@ public class CheckupsController implements Controller {
     {
         CheckupView v = new CheckupView();
 
-        
+        v.setDate(_selectedCheckup.getDate());
+        v.setDosage(_selectedCheckup.getDosage());
+        v.setGrowthSpeed(_selectedCheckup.getGrowthSpeed());
+        v.setPatientHeight(_selectedCheckup.getHeight());
+        v.setWeight(_selectedCheckup.getWeight());
+        v.setInPuberty(_selectedCheckup.inPuberty());
 
+        v.addCommand(_doneCmd);
         return v;
     }
 
@@ -52,7 +59,7 @@ public class CheckupsController implements Controller {
             l.append(cLabel, null);
         }
 
-        l.addCommand(_nextCmd);
+        l.addCommand(_newCmd);
         l.addCommand(_prevCmd);
 
         return l;
@@ -66,6 +73,30 @@ public class CheckupsController implements Controller {
         {
             List l = (List)d;
             _selectedCheckup = selected.getCheckup(l.getSelectedIndex());
+            return this;
+        }
+
+        if(c == _newCmd)
+        {
+            _selectedCheckup = selected.newCheckup();
+            return this;
+        }
+
+        if(null != _selectedCheckup)
+        {
+            CheckupView view = (CheckupView) d;
+            _selectedCheckup.setDate(view.getDate());
+            _selectedCheckup.setDosage(view.getDosage());
+            _selectedCheckup.setGrowthSpeed(view.getGrowthSpeed());
+            _selectedCheckup.setWeight(view.getWeight());
+            _selectedCheckup.setHeight(view.getPatientHeight());
+            if(view.inPuberty() && !_selectedCheckup.inPuberty())
+                _selectedCheckup.enterPuberty();
+            _selectedCheckup = null;
+        }
+
+        if(c == _doneCmd)
+        {
             return this;
         }
 

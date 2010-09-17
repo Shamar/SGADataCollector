@@ -34,13 +34,13 @@ public class ParentsController implements Controller {
     }
 
     public Controller apply(Command c, Displayable d) {
+        Patient selected = User.getInstance().getSelectedPatient();
+        selected.getMother().setHeight(_form.getMotherHeight());
+        selected.getMother().setIsSGA(_form.hasMotherSGA());
+        selected.getFather().setHeight(_form.getFatherHeight());
+        selected.getFather().setIsSGA(_form.hasFatherSGA());
         if(c == _nextCmd)
         {
-             Patient selected = User.getInstance().getSelectedPatient();
-             selected.getMother().setHeight(_form.getMotherHeight());
-             selected.getMother().setIsSGA(_form.hasMotherSGA());
-             selected.getFather().setHeight(_form.getFatherHeight());
-             selected.getFather().setIsSGA(_form.hasFatherSGA());
              return new MaternalController();
         }
         return new MenuController();

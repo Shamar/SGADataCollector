@@ -8,7 +8,6 @@ package sga.controllers;
 import java.util.Enumeration;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Form;
 import sga.Controller;
 import sga.domain.DiagnosticTest;
 import sga.domain.Patient;
@@ -59,7 +58,7 @@ public class TestsController implements Controller {
 
         if(c == _nextCmd)
         {
-            return new TestsController();
+            return new CheckupsController();
         }
         return new MenuController();
     }
