@@ -6,6 +6,9 @@
 package sga.domain;
 
 import java.util.Date;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
+import org.json.me.JSONWriter;
 
 /**
  *
@@ -110,5 +113,18 @@ public class Checkup {
      */
     public void enterPuberty() {
         this._inPuberty = true;
+    }
+
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+        obj.put("Puberty", _inPuberty);
+        obj.put("Date", _date);
+        obj.put("Dosage", _dosage);
+        obj.put("GrowthSpeed", _growthSpeed);
+        obj.put("Height", _height.toJSON());
+        obj.put("Weight", _weight);
+
+        return obj;
     }
 }

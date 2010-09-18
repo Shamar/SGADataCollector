@@ -5,6 +5,10 @@
 
 package sga.domain;
 
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
+import org.json.me.JSONWriter;
+
 /**
  *
  * @author giacomo
@@ -27,5 +31,14 @@ public class BodyMeasure {
     public double getValue()
     {
         return _value;
+    }
+
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+        obj.put("Percentile", _percentile);
+        obj.put("Value", _value);
+
+        return obj;
     }
 }

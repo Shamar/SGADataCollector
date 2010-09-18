@@ -33,13 +33,13 @@ public class ParentsForm extends Form {
         if(mother.getHeight() > 0)
         {
             _motherHeight.setString(String.valueOf(mother.getHeight()));
-            _motherSga.setSelectedIndex(0, mother.isSGA());
         }
+        _motherSga.setSelectedIndex(0, mother.isSGA());
         if(father.getHeight() > 0)
         {
             _fatherHeight.setString(String.valueOf(father.getHeight()));
-            _fatherSga.setSelectedIndex(0, father.isSGA());
         }
+        _fatherSga.setSelectedIndex(0, father.isSGA());
     }
 
     public double getMotherHeight()
