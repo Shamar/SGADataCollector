@@ -21,8 +21,8 @@ import sga.views.CheckupView;
 public class CheckupsController implements Controller {
     private static Command _newCmd = new Command("Nuova", Command.SCREEN, 60);
     private static Command _prevCmd = new Command("Menù", Command.BACK, 60);
-    private static Command _deleteCmd = new Command("Elimina", Command.SCREEN, 60);
-    private static Command _doneCmd = new Command("Fatto", Command.SCREEN, 60);
+    private static Command _deleteCmd = new Command("Elimina", Command.BACK, 60);
+    private static Command _doneCmd = new Command("Ok", Command.SCREEN, 60);
 
     private Checkup _selectedCheckup;
 

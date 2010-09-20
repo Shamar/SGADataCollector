@@ -5,9 +5,17 @@
 
 package sga;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.microedition.io.Connector;
+import javax.microedition.io.file.FileConnection;
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
 import sga.controllers.ApplicationController;
+import sga.domain.User;
 
 /**
  * @author gtesio
@@ -18,8 +26,6 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
     private Controller _controller;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
-    private Form form;
-    private ChoiceGroup choiceGroup;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -87,37 +93,9 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|52-getter|0|52-preInit
-    /**
-     * Returns an initiliazed instance of form component.
-     * @return the initialized component instance
-     */
-    public Form getForm() {
-        if (form == null) {//GEN-END:|52-getter|0|52-preInit
-            // write pre-init user code here
-            form = new Form("form", new Item[] { getChoiceGroup() });//GEN-LINE:|52-getter|1|52-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|52-getter|2|
-        return form;
-    }
-    //</editor-fold>//GEN-END:|52-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: choiceGroup ">//GEN-BEGIN:|53-getter|0|53-preInit
-    /**
-     * Returns an initiliazed instance of choiceGroup component.
-     * @return the initialized component instance
-     */
-    public ChoiceGroup getChoiceGroup() {
-        if (choiceGroup == null) {//GEN-END:|53-getter|0|53-preInit
-            // write pre-init user code here
-            choiceGroup = new ChoiceGroup("", Choice.MULTIPLE);//GEN-BEGIN:|53-getter|1|53-postInit
-            choiceGroup.append("Choice Element 1", null);
-            choiceGroup.setSelectedFlags(new boolean[] { false });//GEN-END:|53-getter|1|53-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|53-getter|2|
-        return choiceGroup;
-    }
-    //</editor-fold>//GEN-END:|53-getter|2|
+
+
 
     /**
      * Returns a display instance.
@@ -154,6 +132,7 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      * Called when MIDlet is paused.
      */
     public void pauseApp() {
+        save();
         midletPaused = true;
     }
 
@@ -184,4 +163,48 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
         }
     }
 
+    private void save()
+    {
+        try {
+            JSONObject object = User.getInstance().getRepository().toJSON();
+            String serialization = object.toString();
+            FileConnection c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
+                    + "sga/", Connector.READ_WRITE);
+            // Checking if the directoy exists or not. If it doesn't exist we
+            // create it.
+            if (c.exists()) {
+                System.out.println("existe");
+
+            } else {
+                System.out.println("nao existe");
+                c.mkdir();
+                c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
+                        + "sga/all.txt", Connector.READ_WRITE);
+                // create the file
+                c.create();
+                // create an OutputStream
+                OutputStream out = c.openOutputStream();
+
+                out.write(serialization.getBytes());
+                out.flush();
+                out.close();
+                // Never forget to close a connection or you can face problems.
+                // Pay attention here! If you close the connection before and
+                // later try to
+                // write something it will throw an exception.
+                c.close();
+
+                c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
+                        + "sga/all.txt", Connector.READ_WRITE);
+                //
+                InputStream in = c.openInputStream();
+                byte[] b = new byte[50];
+                in.read(b);
+                System.out.println(new String(b, 0, b.length));
+
+            }
+        } catch (IOException e) {
+        } catch (JSONException e) {
+        }
+    }
 }

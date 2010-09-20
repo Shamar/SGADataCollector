@@ -18,7 +18,7 @@ import sga.views.ParentsForm;
  */
 public class ParentsController implements Controller {
     private static Command _nextCmd = new Command("Avanti", Command.SCREEN, 60);
-    private static Command _prevCmd = new Command("Annulla", Command.BACK, 60);
+    private static Command _prevCmd = new Command("Menù", Command.BACK, 60);
     private ParentsForm _form;
 
     public ParentsController()
