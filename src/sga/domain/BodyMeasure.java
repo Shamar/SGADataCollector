@@ -7,7 +7,6 @@ package sga.domain;
 
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
-import org.json.me.JSONWriter;
 
 /**
  *
@@ -21,6 +20,11 @@ public class BodyMeasure {
     {
         _percentile = percentile;
         _value = value;
+    }
+
+    BodyMeasure(JSONObject source) {
+        _percentile = source.optInt("Percentile", 0);
+        _value = source.optDouble("Value", 0);
     }
 
     public int getPercentile()

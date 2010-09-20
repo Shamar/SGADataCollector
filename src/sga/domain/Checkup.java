@@ -22,6 +22,11 @@ public class Checkup {
     private double _dosage;
     private boolean _inPuberty;
 
+    public Checkup()
+    {
+
+    }
+
     public Checkup(Checkup previous)
     {
         if(null != previous)
@@ -29,6 +34,31 @@ public class Checkup {
             _date = new Date(previous.getDate().getTime() + 15768000000L);
             _inPuberty = previous._inPuberty;
         }
+    }
+
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+        obj.put("Puberty", _inPuberty);
+        if(null != _date)
+            obj.put("Date", _date.getTime());
+        obj.put("Dosage", _dosage);
+        obj.put("GrowthSpeed", _growthSpeed);
+        if(null != _height)
+            obj.put("Height", _height.toJSON());
+        obj.put("Weight", _weight);
+
+        return obj;
+    }
+    public Checkup(JSONObject source) throws JSONException {
+        _inPuberty = source.optBoolean("Puberty", false);
+        _date = new Date(source.getLong("Date"));
+        _dosage = source.optDouble("Dosage", 0);
+        _growthSpeed = source.optDouble("GrowthSpeed", 0);
+        JSONObject jsonH = source.getJSONObject("Height");
+        if(null != jsonH)
+            _height = new BodyMeasure(jsonH);
+        _weight = source.optDouble("Weight", 0);
     }
 
     /**
@@ -115,16 +145,4 @@ public class Checkup {
         this._inPuberty = true;
     }
 
-    public JSONObject toJSON() throws JSONException
-    {
-        JSONObject obj = new JSONObject();
-        obj.put("Puberty", _inPuberty);
-        obj.put("Date", _date);
-        obj.put("Dosage", _dosage);
-        obj.put("GrowthSpeed", _growthSpeed);
-        obj.put("Height", _height.toJSON());
-        obj.put("Weight", _weight);
-
-        return obj;
-    }
 }

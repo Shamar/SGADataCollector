@@ -7,6 +7,7 @@ package sga.domain;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import org.json.me.JSONArray;
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
 /**
@@ -48,5 +49,18 @@ public class PatientRepository {
             obj.accumulate("Patients", _collection[i].toJSON());
 
         return obj;
+    }
+
+    public void fromJSON(JSONObject source) throws JSONException
+    {
+        JSONArray array = source.getJSONArray("Patients");
+        if(array != null)
+        {
+            _collection = new Patient[array.length()];
+            for(int i = 0; i < array.length(); ++i)
+            {
+                _collection[i] = new Patient(array.getJSONObject(i));
+            }
+        }
     }
 }

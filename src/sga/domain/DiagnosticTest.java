@@ -31,12 +31,19 @@ public class DiagnosticTest {
     }
     
     private String _name;
-    private DiagnosticTest(String name)
+    public DiagnosticTest(String name)
     {
         _name = name;
     }
     public String toString()
     {
         return _name;
+    }
+
+    public boolean equals(Object other)
+    {
+        if(null == other)
+            return false;
+        return _name.equals(other.toString());
     }
 }

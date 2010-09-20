@@ -21,6 +21,11 @@ public class Parent {
     {
     }
 
+    Parent(JSONObject source) {
+        _isSGA = source.optBoolean("SGA", false);
+        _height = source.optDouble("Height", 0);
+    }
+
     /**
      * @return the _isSGA
      */

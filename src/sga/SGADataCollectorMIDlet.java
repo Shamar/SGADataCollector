@@ -55,6 +55,7 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
+        User.getInstance().load();
         _controller = new ApplicationController();
         switchDisplayable(null, _controller.getView());
         _controller.getView().setCommandListener(this);
@@ -109,6 +110,7 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      * Exits MIDlet.
      */
     public void exitMIDlet() {
+        User.getInstance().save();
         switchDisplayable (null, null);
         destroyApp(true);
         notifyDestroyed();
@@ -132,7 +134,7 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      * Called when MIDlet is paused.
      */
     public void pauseApp() {
-        save();
+        User.getInstance().save();
         midletPaused = true;
     }
 
@@ -163,48 +165,4 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
         }
     }
 
-    private void save()
-    {
-        try {
-            JSONObject object = User.getInstance().getRepository().toJSON();
-            String serialization = object.toString();
-            FileConnection c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
-                    + "sga/", Connector.READ_WRITE);
-            // Checking if the directoy exists or not. If it doesn't exist we
-            // create it.
-            if (c.exists()) {
-                System.out.println("existe");
-
-            } else {
-                System.out.println("nao existe");
-                c.mkdir();
-                c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
-                        + "sga/all.txt", Connector.READ_WRITE);
-                // create the file
-                c.create();
-                // create an OutputStream
-                OutputStream out = c.openOutputStream();
-
-                out.write(serialization.getBytes());
-                out.flush();
-                out.close();
-                // Never forget to close a connection or you can face problems.
-                // Pay attention here! If you close the connection before and
-                // later try to
-                // write something it will throw an exception.
-                c.close();
-
-                c = (FileConnection) Connector.open(System.getProperty("fileconn.dir.photos")
-                        + "sga/all.txt", Connector.READ_WRITE);
-                //
-                InputStream in = c.openInputStream();
-                byte[] b = new byte[50];
-                in.read(b);
-                System.out.println(new String(b, 0, b.length));
-
-            }
-        } catch (IOException e) {
-        } catch (JSONException e) {
-        }
-    }
 }

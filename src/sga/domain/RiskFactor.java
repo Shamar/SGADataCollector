@@ -19,8 +19,7 @@ public class RiskFactor {
     {
         if(null == _maternals)
         {
-            //_all = new
-            _maternals = new Vector(16);
+            _maternals = new Vector(8);
             _maternals.addElement(new RiskFactor("high blood pressure"));
             _maternals.addElement(new RiskFactor("chronic kidney disease"));
             _maternals.addElement(new RiskFactor("advanced diabetes"));
@@ -38,8 +37,7 @@ public class RiskFactor {
     {
         if(null == _uterins)
         {
-            //_all = new
-            _uterins = new Vector(16);
+            _uterins = new Vector(4);
             _uterins.addElement(new RiskFactor("decreased blood flow in the uterus and placenta"));
             _uterins.addElement(new RiskFactor("placental abruption (placenta detaches from the uterus)"));
             _uterins.addElement(new RiskFactor("placenta previa (placenta attaches low in the uterus)"));
@@ -53,8 +51,7 @@ public class RiskFactor {
     {
         if(null == _fetals)
         {
-            //_all = new
-            _fetals = new Vector(16);
+            _fetals = new Vector(4);
             _fetals.addElement(new RiskFactor("multiple gestation"));
             _fetals.addElement(new RiskFactor("infection"));
             _fetals.addElement(new RiskFactor("birth defects"));
@@ -64,12 +61,19 @@ public class RiskFactor {
     }
 
     private String _name;
-    private RiskFactor(String name)
+    public RiskFactor(String name)
     {
         _name = name;
     }
     public String toString()
     {
         return _name;
+    }
+
+    public boolean equals(Object other)
+    {
+        if(null == other)
+            return false;
+        return _name.equals(other.toString());
     }
 }
