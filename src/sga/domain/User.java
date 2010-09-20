@@ -70,8 +70,9 @@ public class User {
 
             if(c.exists())
             {
-                Date now = new Date();
-                c.rename("all." + String.valueOf(now.getTime())+".txt");
+                //Date now = new Date();
+                //c.rename("all." + String.valueOf(now.getTime())+".txt");
+                c.delete();
                 c = (FileConnection) Connector.open(_outputFile, Connector.READ_WRITE);
             }
 
