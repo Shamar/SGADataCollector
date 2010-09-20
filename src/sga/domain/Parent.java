@@ -5,6 +5,9 @@
 
 package sga.domain;
 
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
+
 /**
  *
  * @author gtesio
@@ -44,5 +47,14 @@ public class Parent {
      */
     public void setHeight(double height) {
         this._height = height;
+    }
+
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+        obj.put("SGA", _isSGA);
+        obj.put("Height", _height);
+
+        return obj;
     }
 }

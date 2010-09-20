@@ -21,6 +21,7 @@ import sga.views.CheckupView;
 public class CheckupsController implements Controller {
     private static Command _newCmd = new Command("Nuova", Command.SCREEN, 60);
     private static Command _prevCmd = new Command("Menù", Command.BACK, 60);
+    private static Command _deleteCmd = new Command("Elimina", Command.SCREEN, 60);
     private static Command _doneCmd = new Command("Fatto", Command.SCREEN, 60);
 
     private Checkup _selectedCheckup;
@@ -43,6 +44,7 @@ public class CheckupsController implements Controller {
         v.setInPuberty(_selectedCheckup.inPuberty());
 
         v.addCommand(_doneCmd);
+        v.addCommand(_deleteCmd);
         return v;
     }
 
@@ -73,6 +75,13 @@ public class CheckupsController implements Controller {
         {
             List l = (List)d;
             _selectedCheckup = selected.getCheckup(l.getSelectedIndex());
+            return this;
+        }
+
+        if(c == _deleteCmd)
+        {
+            selected.removeCheckup(_selectedCheckup);
+            _selectedCheckup = null;
             return this;
         }
 

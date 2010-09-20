@@ -7,6 +7,8 @@ package sga.domain;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
 /**
  *
  * @author gtesio
@@ -38,4 +40,13 @@ public class PatientRepository {
         return _collection[index];
     }
 
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+
+        for(int i = 0; i < _collection.length; ++i)
+            obj.accumulate("Patients", _collection[i].toJSON());
+
+        return obj;
+    }
 }

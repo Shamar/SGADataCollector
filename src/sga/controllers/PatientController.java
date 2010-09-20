@@ -19,7 +19,7 @@ import sga.views.PatientForm;
 public class PatientController implements Controller {
     private PatientForm _view;
     private static Command _nextCmd = new Command("Avanti", Command.SCREEN, 60);
-    private static Command _prevCmd = new Command("Menù", Command.BACK, 60);
+    private static Command _prevCmd = new Command("Tutti", Command.BACK, 60);
     private Patient _patient;
 
     public PatientController() {

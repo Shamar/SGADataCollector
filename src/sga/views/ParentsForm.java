@@ -16,8 +16,8 @@ import sga.domain.Parent;
  * @author gtesio
  */
 public class ParentsForm extends Form {
-    private TextField _fatherHeight = new TextField("Altezza (cm)", null, 4, TextField.DECIMAL);
-    private TextField _motherHeight = new TextField("Altezza (cm)", null, 4, TextField.DECIMAL);
+    private TextField _fatherHeight = new TextField("Altezza (cm)", null, 5, TextField.DECIMAL);
+    private TextField _motherHeight = new TextField("Altezza (cm)", null, 5, TextField.DECIMAL);
     private ChoiceGroup _motherSga = new ChoiceGroup("Madre", Choice.MULTIPLE);
     private ChoiceGroup _fatherSga = new ChoiceGroup("Padre", Choice.MULTIPLE);
     public ParentsForm(String patientName, Parent mother, Parent father)

@@ -6,6 +6,8 @@ package sga.domain;
 
 import java.util.Date;
 import java.util.Enumeration;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
 
 /**
  *
@@ -63,6 +65,26 @@ public class Patient {
         if(null == _checkups || index < 0 || index >= _checkups.length)
             return null;
         return _checkups[index];
+    }
+
+    public void removeCheckup(Checkup checkup)
+    {
+        for(int i = 0; i < _checkups.length; ++i)
+        {
+            if(_checkups[i].equals(checkup))
+            {
+                Checkup[] newValue = new Checkup[_checkups.length - 1];
+                for(int j = 0; j < _checkups.length; ++j)
+                {
+                    if(j < i)
+                        newValue[j] = _checkups[j];
+                    else if(j > i)
+                        newValue[j-1] = _checkups[j];
+                }
+                _checkups = newValue;
+                return;
+            }
+        }
     }
 
     public boolean getGHDeficit()
@@ -223,5 +245,23 @@ public class Patient {
         this._mph = mph;
     }
 
-    
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+
+        obj.put("Name", _name);
+        obj.put("BirthDay", _birthDate);
+        obj.put("Father", getFather().toJSON());
+        obj.put("Mother", getMother().toJSON());
+        obj.put("GHDeficit", _GHdeficit);
+        obj.put("MPH", _mph.toJSON());
+        for(int i = 0; i < _riskFactors.length; ++i)
+            obj.accumulate("RiskFactors", _riskFactors[i].toString());
+        for(int i = 0; i < _checkups.length; ++i)
+            obj.accumulate("Checkups", _checkups[i].toJSON());
+        for(int i = 0; i < _diagnosticTests.length; ++i)
+            obj.accumulate("DiagnosticTests", _diagnosticTests[i].toString());
+
+        return obj;
+    }
 }

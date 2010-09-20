@@ -25,7 +25,7 @@ public class MenuController implements Controller {
     public static String FETALS = "Fattori fetali";
     public static String TESTS = "Test diagnostici";
 
-    public static Command PreviousCmd = new Command("Indietro", Command.BACK, 60);
+    public static Command _prevCmd = new Command("Indietro", Command.BACK, 60);
 
     private List _view;
 
@@ -41,6 +41,7 @@ public class MenuController implements Controller {
         _view.append(CHECKUPS, null);
         if(selected.numberOfCheckups() > 0)
             _view.setSelectedIndex(5, true);
+        _view.addCommand(_prevCmd);
     }
 
     public Displayable getView() {
@@ -75,7 +76,7 @@ public class MenuController implements Controller {
                 return new CheckupsController();
             }
         }
-        if(c == PreviousCmd)
+        if(c == _prevCmd)
         {
             return new PatientController();
         }
