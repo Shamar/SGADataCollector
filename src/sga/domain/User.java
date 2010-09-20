@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.util.Date;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
+import org.json.me.JSONArray;
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
@@ -57,7 +58,7 @@ public class User {
     public void save()
     {
         try {
-            JSONObject object = User.getInstance().getRepository().toJSON();
+            JSONArray object = User.getInstance().getRepository().toJSON();
             String serialization = object.toString();
             FileConnection d = (FileConnection) Connector.open(_outputDir, Connector.READ_WRITE);
 
@@ -121,7 +122,7 @@ public class User {
                 fis.close();
                 fileConn.close();
 
-                JSONObject obj = new JSONObject(new String(filedata, 0, filedata.length));
+                JSONArray obj = new JSONArray(new String(filedata, 0, filedata.length));
                 //System.out.println();
                 _repository.fromJSON(obj);
 

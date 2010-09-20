@@ -34,32 +34,40 @@ public class Patient {
 
     Patient(JSONObject source) throws JSONException {
         _name = source.getString("Name");
-        _birthDate = new Date(source.getLong("BirthDay"));
+        _birthDate = new Date(source.optLong("BirthDay"));
         _father = new Parent(source.getJSONObject("Father"));
         _mother = new Parent(source.getJSONObject("Mother"));
         _GHdeficit = source.optBoolean("GHDeficit", false);
         _mph = new BodyMeasure(source.getJSONObject("MPH"));
 
-        JSONArray array = source.getJSONArray("Patients");
+        JSONArray array = source.optJSONArray("RiskFactors");
         if(array != null)
         {
             _riskFactors = new RiskFactor[array.length()];
             for(int i = 0; i < array.length(); ++i)
                 _riskFactors[i] = new RiskFactor(array.getString(i));
         }
-        array = source.getJSONArray("Checkups");
+        else
+        {
+            _riskFactors = new RiskFactor[0];
+        }
+        array = source.optJSONArray("Checkups");
         if(array != null)
         {
             _checkups = new Checkup[array.length()];
             for(int i = 0; i < array.length(); ++i)
                 _checkups[i] = new Checkup(array.getJSONObject(i));
         }
-        array = source.getJSONArray("DiagnosticTests");
+        array = source.optJSONArray("DiagnosticTests");
         if(array != null)
         {
             _diagnosticTests = new DiagnosticTest[array.length()];
             for(int i = 0; i < array.length(); ++i)
                 _diagnosticTests[i] = new DiagnosticTest(array.getString(i));
+        }
+        else
+        {
+            _diagnosticTests = new DiagnosticTest[0];
         }
     }
 
@@ -81,8 +89,11 @@ public class Patient {
         {
             obj.put("MPH", _mph.toJSON());
         }
-        for(int i = 0; i < _riskFactors.length; ++i)
-            obj.accumulate("RiskFactors", _riskFactors[i].toString());
+        if(null == _riskFactors)
+            obj.put("RiskFactors", new JSONArray());
+        else
+            for(int i = 0; i < _riskFactors.length; ++i)
+                obj.accumulate("RiskFactors", _riskFactors[i].toString());
         if(null == _checkups)
         {
             obj.put("Checkups", new JSONArray());
@@ -92,8 +103,11 @@ public class Patient {
             for(int i = 0; i < _checkups.length; ++i)
                 obj.accumulate("Checkups", _checkups[i].toJSON());
         }
-        for(int i = 0; i < _diagnosticTests.length; ++i)
-            obj.accumulate("DiagnosticTests", _diagnosticTests[i].toString());
+        if(null == _riskFactors)
+            obj.put("DiagnosticTests", new JSONArray());
+        else
+            for(int i = 0; i < _diagnosticTests.length; ++i)
+                obj.accumulate("DiagnosticTests", _diagnosticTests[i].toString());
 
         return obj;
     }
@@ -101,7 +115,7 @@ public class Patient {
     public Checkup newCheckup()
     {
         Checkup newCheckup;
-        if(null == _checkups)
+        if(null == _checkups || _checkups.length == 0)
         {
             _checkups = new Checkup[1];
             newCheckup = new Checkup();

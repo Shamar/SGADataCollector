@@ -86,8 +86,8 @@ import java.util.Vector;
 public class JSONObject {
     
 //#if CLDC=="1.0"
-    public static final Boolean TRUE = new Boolean(true);
-    public static final Boolean FALSE = new Boolean(false);
+//#     public static final Boolean TRUE = new Boolean(true);
+//#     public static final Boolean FALSE = new Boolean(false);
 //#endif    
 
     /**
@@ -315,30 +315,30 @@ public class JSONObject {
 //#endif
 
 //#if CLDC!="1.0"
-//#     /**
-//#      * Produce a string from a double. The string "null" will be returned if
-//#      * the number is not finite.
-//#      * @param  d A double.
-//#      * @return A String.
-//#      */
-//#     static public String doubleToString(double d) {
-//#         if (Double.isInfinite(d) || Double.isNaN(d)) {
-//#         	return "null";
-//#         }
-//# 
-//# // Shave off trailing zeros and decimal point, if possible.
-//# 
-//#         String s = Double.toString(d);
-//#         if (s.indexOf('.') > 0 && s.indexOf('e') < 0 && s.indexOf('E') < 0) {
-//#             while (s.endsWith("0")) {
-//#                 s = s.substring(0, s.length() - 1);
-//#             }
-//#             if (s.endsWith(".")) {
-//#                 s = s.substring(0, s.length() - 1);
-//#             }
-//#         }
-//#         return s;
-//#     }
+    /**
+     * Produce a string from a double. The string "null" will be returned if
+     * the number is not finite.
+     * @param  d A double.
+     * @return A String.
+     */
+    static public String doubleToString(double d) {
+        if (Double.isInfinite(d) || Double.isNaN(d)) {
+        	return "null";
+        }
+
+// Shave off trailing zeros and decimal point, if possible.
+
+        String s = Double.toString(d);
+        if (s.indexOf('.') > 0 && s.indexOf('e') < 0 && s.indexOf('E') < 0) {
+            while (s.endsWith("0")) {
+                s = s.substring(0, s.length() - 1);
+            }
+            if (s.endsWith(".")) {
+                s = s.substring(0, s.length() - 1);
+            }
+        }
+        return s;
+    }
 //#endif
 
     /**
@@ -369,17 +369,17 @@ public class JSONObject {
     public boolean getBoolean(String key) throws JSONException {
         Object o = get(key);
 //#if CLDC!="1.0"
-//#         if (o.equals(Boolean.FALSE) ||
+        if (o.equals(Boolean.FALSE) ||
 //#else
-        if (o.equals(FALSE) ||
+//#         if (o.equals(FALSE) ||
 //#endif
                 (o instanceof String &&
                 ((String)o).toLowerCase().equals("false"))) {
             return false;
 //#if CLDC!="1.0"
-//#         } else if (o.equals(Boolean.TRUE) ||
+        } else if (o.equals(Boolean.TRUE) ||
 //#else
-        } else if (o.equals(TRUE) ||
+//#         } else if (o.equals(TRUE) ||
 //#endif
                 (o instanceof String &&
                 ((String)o).toLowerCase().equals("true"))) {
@@ -390,38 +390,38 @@ public class JSONObject {
     }
 
 //#if CLDC!="1.0"
-//#     /**
-//#      * Get the double value associated with a key.
-//#      * @param key   A key string.
-//#      * @return      The numeric value.
-//#      * @throws JSONException if the key is not found or
-//#      *  if the value is not a Number object and cannot be converted to a number.
-//#      */
-//#     public double getDouble(String key) throws JSONException {
-//#         Object o = get(key);
-//#         if (o instanceof Byte) {
-//#             return (double) ((Byte)o).byteValue();
-//#         } else if (o instanceof Short) {
-//#             return (double) ((Short)o).shortValue();
-//#         } else if (o instanceof Integer) {
-//#             return (double) ((Integer)o).intValue();
-//#         } else if (o instanceof Long) {
-//#             return (double) ((Long)o).longValue();
-//#         } else if (o instanceof Float) {
-//#             return (double) ((Float)o).floatValue();
-//#         } else if (o instanceof Double) {
-//#             return ((Double)o).doubleValue();
-//#         } else if (o instanceof String) {
-//#             try {
-//#                 return Double.valueOf((String)o).doubleValue();
-//#             } catch (Exception e) {
-//#                 throw new JSONException("JSONObject[" + quote(key) +
-//#                     "] is not a number.");
-//#             }
-//#         } 
-//#         throw new JSONException("JSONObject[" + quote(key) +
-//#             "] is not a number.");
-//#     }
+    /**
+     * Get the double value associated with a key.
+     * @param key   A key string.
+     * @return      The numeric value.
+     * @throws JSONException if the key is not found or
+     *  if the value is not a Number object and cannot be converted to a number.
+     */
+    public double getDouble(String key) throws JSONException {
+        Object o = get(key);
+        if (o instanceof Byte) {
+            return (double) ((Byte)o).byteValue();
+        } else if (o instanceof Short) {
+            return (double) ((Short)o).shortValue();
+        } else if (o instanceof Integer) {
+            return (double) ((Integer)o).intValue();
+        } else if (o instanceof Long) {
+            return (double) ((Long)o).longValue();
+        } else if (o instanceof Float) {
+            return (double) ((Float)o).floatValue();
+        } else if (o instanceof Double) {
+            return ((Double)o).doubleValue();
+        } else if (o instanceof String) {
+            try {
+                return Double.valueOf((String)o).doubleValue();
+            } catch (Exception e) {
+                throw new JSONException("JSONObject[" + quote(key) +
+                    "] is not a number.");
+            }
+        } 
+        throw new JSONException("JSONObject[" + quote(key) +
+            "] is not a number.");
+    }
 //#endif
 
 
@@ -445,12 +445,12 @@ public class JSONObject {
         } else if (o instanceof Long) {
             return (int) ((Long)o).longValue();
 //#if CLDC!="1.0"
-//#         } else if (o instanceof Float) {
-//#             return (int) ((Float)o).floatValue();
-//#         } else if (o instanceof Double) {
-//#             return (int) ((Double)o).doubleValue();
-//#         } else if (o instanceof String) {
-//#             return (int) getDouble(key);
+        } else if (o instanceof Float) {
+            return (int) ((Float)o).floatValue();
+        } else if (o instanceof Double) {
+            return (int) ((Double)o).doubleValue();
+        } else if (o instanceof String) {
+            return (int) getDouble(key);
 //#endif
         } 
         throw new JSONException("JSONObject[" + quote(key) +
@@ -512,12 +512,12 @@ public class JSONObject {
         } else if (o instanceof Long) {
             return ((Long)o).longValue();
 //#if CLDC!="1.0"
-//#         } else if (o instanceof Float) {
-//#             return (long) ((Float)o).floatValue();
-//#         } else if (o instanceof Double) {
-//#             return (long) ((Double)o).doubleValue();
-//#         } else if (o instanceof String) {
-//#             return (long) getDouble(key);
+        } else if (o instanceof Float) {
+            return (long) ((Float)o).floatValue();
+        } else if (o instanceof Double) {
+            return (long) ((Double)o).doubleValue();
+        } else if (o instanceof String) {
+            return (long) getDouble(key);
 //#endif
         } 
         throw new JSONException("JSONObject[" + quote(key) +
@@ -679,39 +679,38 @@ public class JSONObject {
 
     
 //#if CLDC!="1.0"
-//#     /**
-//#      * Get an optional double associated with a key,
-//#      * or NaN if there is no such key or if its value is not a number.
-//#      * If the value is a string, an attempt will be made to evaluate it as
-//#      * a number.
-//#      *
-//#      * @param key   A string which is the key.
-//#      * @return      An object which is the value.
-//#      */
-//#     public double optDouble(String key) {
-//#         return optDouble(key, Double.NaN);
-//#     }
+    /**
+     * Get an optional double associated with a key,
+     * or NaN if there is no such key or if its value is not a number.
+     * If the value is a string, an attempt will be made to evaluate it as
+     * a number.
+     *
+     * @param key   A string which is the key.
+     * @return      An object which is the value.
+     */
+    public double optDouble(String key) {
+        return optDouble(key, Double.NaN);
+    }
 //#endif
 
 //#if CLDC!="1.0"
-//#     /**
-//#      * Get an optional double associated with a key, or the
-//#      * defaultValue if there is no such key or if its value is not a number.
-//#      * If the value is a string, an attempt will be made to evaluate it as
-//#      * a number.
-//#      *
-//#      * @param key   A key string.
-//#      * @param defaultValue     The default.
-//#      * @return      An object which is the value.
-//#      */
-//#     public double optDouble(String key, double defaultValue) {
-//#         try {
-//#             Object o = opt(key);
-//#             return Double.parseDouble((String)o);
-//#         } catch (Exception e) {
-//#             return defaultValue;
-//#         }
-//#     }
+    /**
+     * Get an optional double associated with a key, or the
+     * defaultValue if there is no such key or if its value is not a number.
+     * If the value is a string, an attempt will be made to evaluate it as
+     * a number.
+     *
+     * @param key   A key string.
+     * @param defaultValue     The default.
+     * @return      An object which is the value.
+     */
+    public double optDouble(String key, double defaultValue) {
+        try {
+            return getDouble(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
 //#endif
 
     /**
@@ -845,27 +844,27 @@ public class JSONObject {
      */
     public JSONObject put(String key, boolean value) throws JSONException {
 //#if CLDC!="1.0"
-//#         put(key, value ? Boolean.TRUE : Boolean.FALSE);
+        put(key, value ? Boolean.TRUE : Boolean.FALSE);
 //#else
-        put(key, value ? TRUE : FALSE);
+//#         put(key, value ? TRUE : FALSE);
 //#endif
         return this;
     }
 
 
 //#if CLDC!="1.0"
-//#     /**
-//#      * Put a key/double pair in the JSONObject.
-//#      *
-//#      * @param key   A key string.
-//#      * @param value A double which is the value.
-//#      * @return this.
-//#      * @throws JSONException If the key is null or if the number is invalid.
-//#      */
-//#     public JSONObject put(String key, double value) throws JSONException {
-//#         put(key, new Double(value));
-//#         return this;
-//#     }
+    /**
+     * Put a key/double pair in the JSONObject.
+     *
+     * @param key   A key string.
+     * @param value A double which is the value.
+     * @return this.
+     * @throws JSONException If the key is null or if the number is invalid.
+     */
+    public JSONObject put(String key, double value) throws JSONException {
+        put(key, new Double(value));
+        return this;
+    }
 //#endif
 
     /**
@@ -1034,17 +1033,17 @@ public class JSONObject {
     static void testValidity(Object o) throws JSONException {
         if (o != null) {
 //#if CLDC!="1.0"
-//#             if (o instanceof Double) {
-//#                 if (((Double)o).isInfinite() || ((Double)o).isNaN()) {
-//#                     throw new JSONException(
-//#                         "JSON does not allow non-finite numbers");
-//#                 }
-//#             } else if (o instanceof Float) {
-//#                 if (((Float)o).isInfinite() || ((Float)o).isNaN()) {
-//#                     throw new JSONException(
-//#                         "JSON does not allow non-finite numbers.");
-//#                 }
-//#             }
+            if (o instanceof Double) {
+                if (((Double)o).isInfinite() || ((Double)o).isNaN()) {
+                    throw new JSONException(
+                        "JSON does not allow non-finite numbers");
+                }
+            } else if (o instanceof Float) {
+                if (((Float)o).isInfinite() || ((Float)o).isNaN()) {
+                    throw new JSONException(
+                        "JSON does not allow non-finite numbers.");
+                }
+            }
 //#endif
         }
     }
@@ -1209,9 +1208,9 @@ public class JSONObject {
             throw new JSONException("Bad value from toJSONString: " + o);
         }
 //#if CLDC!="1.0"
-//#         if (value instanceof Float || value instanceof Double ||
+        if (value instanceof Float || value instanceof Double ||
 //#else
-        if (
+//#         if (
 //#endif
             value instanceof Byte || value instanceof Short || 
             value instanceof Integer || value instanceof Long) {
@@ -1255,9 +1254,9 @@ public class JSONObject {
         	/* forget about it */
         }
 //#if CLDC!="1.0"
-//#         if (value instanceof Float || value instanceof Double ||
+        if (value instanceof Float || value instanceof Double ||
 //#else
-        if (
+//#         if (
 //#endif
             value instanceof Byte || value instanceof Short || 
             value instanceof Integer || value instanceof Long) {

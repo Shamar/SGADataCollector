@@ -41,19 +41,18 @@ public class PatientRepository {
         return _collection[index];
     }
 
-    public JSONObject toJSON() throws JSONException
+    public JSONArray toJSON() throws JSONException
     {
-        JSONObject obj = new JSONObject();
+        JSONArray arr = new JSONArray();
 
         for(int i = 0; i < _collection.length; ++i)
-            obj.accumulate("Patients", _collection[i].toJSON());
+            arr.put(_collection[i].toJSON());
 
-        return obj;
+        return arr;
     }
 
-    public void fromJSON(JSONObject source) throws JSONException
+    public void fromJSON(JSONArray array) throws JSONException
     {
-        JSONArray array = source.getJSONArray("Patients");
         if(array != null)
         {
             _collection = new Patient[array.length()];

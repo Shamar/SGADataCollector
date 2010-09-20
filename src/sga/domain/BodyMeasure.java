@@ -22,9 +22,9 @@ public class BodyMeasure {
         _value = value;
     }
 
-    BodyMeasure(JSONObject source) {
+    public BodyMeasure(JSONObject source) throws JSONException {
         _percentile = source.optInt("Percentile", 0);
-        _value = source.optDouble("Value", 0);
+        _value = source.optDouble("Value",0);
     }
 
     public int getPercentile()
