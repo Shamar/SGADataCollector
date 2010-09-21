@@ -60,6 +60,7 @@ public class User {
         try {
             JSONArray object = User.getInstance().getRepository().toJSON();
             String serialization = object.toString();
+            /*
             FileConnection d = (FileConnection) Connector.open(_outputDir, Connector.READ_WRITE);
 
             if (!d.exists()) {
@@ -77,6 +78,8 @@ public class User {
             }
 
             c.create();
+            */
+            FileConnection c = (FileConnection) Connector.open(_outputFile, Connector.READ_WRITE);
 
             OutputStream out = c.openOutputStream();
 

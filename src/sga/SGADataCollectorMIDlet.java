@@ -5,15 +5,8 @@
 
 package sga;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import javax.microedition.io.Connector;
-import javax.microedition.io.file.FileConnection;
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
-import org.json.me.JSONException;
-import org.json.me.JSONObject;
 import sga.controllers.ApplicationController;
 import sga.domain.User;
 
@@ -134,7 +127,6 @@ public class SGADataCollectorMIDlet extends MIDlet implements CommandListener {
      * Called when MIDlet is paused.
      */
     public void pauseApp() {
-        User.getInstance().save();
         midletPaused = true;
     }
 
