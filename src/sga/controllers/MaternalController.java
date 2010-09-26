@@ -50,10 +50,12 @@ public class MaternalController implements Controller {
         for(Enumeration e = RiskFactor.Maternals(); e.hasMoreElements();)
         {
             RiskFactor rf = (RiskFactor)e.nextElement();
-            if(_view.isChecked(rf))
+            if(_view.isChecked(rf)){
                 selected.addRiskFactor(rf);
-            else
+            }
+            else{
                 selected.removeRiskFactor(rf);
+            }
         }
 
         if(c == _nextCmd)

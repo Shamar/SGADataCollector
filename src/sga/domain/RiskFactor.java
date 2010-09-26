@@ -25,7 +25,7 @@ public class RiskFactor {
             _maternals.addElement(new RiskFactor("advanced diabetes"));
             _maternals.addElement(new RiskFactor("heart or respiratory disease"));
             _maternals.addElement(new RiskFactor("malnutrition, anemia"));
-            _maternals.addElement(new RiskFactor("infection"));
+            _maternals.addElement(new RiskFactor("maternal infection"));
             _maternals.addElement(new RiskFactor("substance use"));
             _maternals.addElement(new RiskFactor("cigarette smoking"));
         }

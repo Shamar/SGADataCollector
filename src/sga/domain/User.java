@@ -98,9 +98,8 @@ public class User {
  *
  */
         } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+        } catch (SecurityException e) {
         }
     }
 
@@ -132,9 +131,8 @@ public class User {
 
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+        } catch (SecurityException e) {
         }
     }
 }

@@ -205,18 +205,18 @@ public class Patient {
             if(_riskFactors.length == 0)
                 return;
             RiskFactor[] newValue = new RiskFactor[_riskFactors.length - 1];
-            int j = 0;
-            boolean removed = false;
+            int removed = 0;
             for(int i = 0; i < _riskFactors.length; ++i)
-                if(_riskFactors[i] != riskFactor)
+                if(!_riskFactors[i].equals(riskFactor))
                 {
-                    newValue[j++] = _riskFactors[i];
+                    if(i-removed < newValue.length)
+                        newValue[i-removed] = _riskFactors[i];
                 }
                 else
                 {
-                    removed = true;
+                    removed++;
                 }
-            if(removed)
+            if(removed > 0)
                 _riskFactors = newValue;
         }
     }
