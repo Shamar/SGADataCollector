@@ -1,0 +1,50 @@
+\documentclass[12pt]{toptesi}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage{graphicx}
+   \usepackage{epstopdf}
+   \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+   \pdfcompresslevel=9
+\else
+   \usepackage{graphicx}
+\fi
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[utf8x]{inputenc}
+\usepackage[superscript]{cite}
+\ateneo{Universit{\`a} degli Studi di Torino}
+\facolta{Medicina e Chirurgia - Torino}
+\logosede{logounito}
+\titolo{Impatto della terapia con ormone somatotropo sulla statura finale dei bambini nati piccoli per l'et\`a gestazionale}
+\candidata{Sara Bertolotto}
+\relatore{prof.ssa Barbara Stasiowska}
+\sedutadilaurea{Ottobre 2010}
+\includeonly{%
+preliminari,%
+introduzione,%
+scopo,%
+casistica,%
+risultati,%
+conclusioni,%
+nota39
+}
+\begin{document}
+\include{preliminari}
+\large
+\include{introduzione}
+\include{scopo}
+\include{casistica}
+\include{risultati}
+\include{conclusioni}
+\appendix
+\include{nota39}
+\bibliographystyle{plain}
+\bibliography{bibliografia}
+\end{document}
