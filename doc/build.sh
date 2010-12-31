@@ -16,7 +16,7 @@ gnuplot grafici/centili.plot
 (pdflatex -interaction nonstopmode --shell-escape tesi_sara.tex)
 
 if [ -f tesi_sara.pdf ]; then
-  (rm *.out *.log *.aux web.tex *~ *.lo* *.toc *.tpt *.bbl *.blg)
+  (rm *.aux *.lo* *.toc *.tpt *.bbl *.blg)
   (mv tesi_sara.pdf Tesi.pdf)
   (cd ../)
   (git commit -am "$LOG")
