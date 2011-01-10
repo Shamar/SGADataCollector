@@ -5,7 +5,29 @@ if [ ! -n "$LOG" ]; then
   export LOG="piccole correzioni"
 fi
 
-gnuplot grafici/centili.plot
+plot()
+{
+        if command -v gnuplot &>/dev/null
+        then
+                gnuplot $1
+                return 1
+        fi
+}
+
+showPDF()
+{
+        if command -v xpdf &>/dev/null
+        then
+                xpdf $1
+               return 1
+	else
+		/c/Programmi/Adobe/Reader\ 9.0/Reader/AcroRd32.exe 'C:\Documents and Settings\Sara\SGA\SGADataCollector\doc\Tesi.pdf'
+		return 1
+        fi
+}
+
+
+plot grafici/centili.plot
 
 (pdflatex -interaction nonstopmode tesi_sara.tex)
 (bibtex tesi_sara)
@@ -21,7 +43,7 @@ if [ -f tesi_sara.pdf ]; then
   (cd ../)
   (git commit -am "$LOG")
   (git push origin master)
-  xpdf Tesi.pdf
+  showPDF Tesi.pdf
 else
   zenity --error --text "Errore: chiedi a Giacomo" #&& false
 fi
