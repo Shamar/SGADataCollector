@@ -42,7 +42,7 @@ if [ -f tesi_sara.pdf ]; then
   (mv tesi_sara.pdf Tesi.pdf)
   (cd ../)
   (git commit -am "$LOG")
-  (git push origin master)
+#  (git push origin master)
   showPDF Tesi.pdf
 else
   zenity --error --text "Errore: chiedi a Giacomo" #&& false
