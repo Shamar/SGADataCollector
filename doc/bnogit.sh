@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash 
 
 plot()
 {
@@ -23,7 +23,7 @@ showPDF()
 
 cd ~/SGA/SGADataCollector/doc/
 #gnuplot grafici/centili.plot
-plot grafici/centili.plot
+#plot grafici/centili.plot
 
 (pdflatex -interaction nonstopmode tesi_sara.tex)
 (bibtex tesi_sara)

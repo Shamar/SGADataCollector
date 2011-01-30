@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash
 cd ~/SGA/SGADataCollector/doc/
 export LOG=$(zenity --entry --text "Cosa hai fatto?")
 if [ ! -n "$LOG" ]; then
