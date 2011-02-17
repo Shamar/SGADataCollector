@@ -1,0 +1,38 @@
+> model <- lm(datiDF$GuadSDS ~ datiDF$HINPub + datiDF$Hsds + datiDF$EtINTer + datiDF$DurPrep + datiDF$DefGH + datiDF$DurTot)
+> summary(model)
+
+Call:
+lm(formula = datiDF$GuadSDS ~ datiDF$HINPub + datiDF$Hsds + datiDF$EtINTer + 
+    datiDF$DurPrep + datiDF$DefGH + datiDF$DurTot)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.756263 -0.355157  0.001114  0.128428  1.253723 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    -21.11010    3.22247  -6.551 2.20e-06 ***
+datiDF$HINPub    0.21253    0.03316   6.409 2.98e-06 ***
+datiDF$Hsds     -1.47560    0.23674  -6.233 4.36e-06 ***
+datiDF$EtINTer  -0.78241    0.19617  -3.988 0.000723 ***
+datiDF$DurPrep  -0.79613    0.18266  -4.358 0.000304 ***
+datiDF$DefGH     0.24995    0.24489   1.021 0.319604    
+datiDF$DurTot   -0.22456    0.14523  -1.546 0.137731    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 
+
+Residual standard error: 0.555 on 20 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared: 0.7707,	Adjusted R-squared: 0.7019 
+F-statistic:  11.2 on 6 and 20 DF,  p-value: 1.665e-05 
+
+> confint(model)
+                     2.5 %       97.5 %
+(Intercept)    -27.8320567 -14.38814485
+datiDF$HINPub    0.1433595   0.28169450
+datiDF$Hsds     -1.9694364  -0.98175624
+datiDF$EtINTer  -1.1916050  -0.37320639
+datiDF$DurPrep  -1.1771618  -0.41510400
+datiDF$DefGH    -0.2608853   0.76078959
+datiDF$DurTot   -0.5275173   0.07839076
+
