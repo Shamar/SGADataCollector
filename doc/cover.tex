@@ -1,0 +1,58 @@
+\documentclass[12pt]{toptesi}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage{graphicx}
+   \usepackage{epstopdf}
+   \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+   \pdfcompresslevel=9
+\else
+   \usepackage{graphicx}
+\fi
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage[utf8x]{inputenc}
+\usepackage[superscript]{cite}
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage[top=1cm, bottom=1cm, left=12cm, right=15cm]{geometry}
+\ateneo{Universit{\`a} degli Studi di Torino}
+\TesiDiLaurea{Tesi di Laurea}
+\facolta{Medicina e Chirurgia - Torino}
+\logosede{logo}
+\titolo{Impatto della terapia con ormone somatotropo sulla statura finale dei bambini nati piccoli per l'et\`a gestazionale}
+\candidata{Sara Bertolotto}
+\relatore{prof. Franco Cerutti}
+\sedutadilaurea{Anno Accademico 2010 -- 2011}
+\paperwidth = 597pt
+\includeonly{%
+preliminari,%
+introduzione,%
+scopo,%
+casistica,%
+risultati,%
+conclusioni,%
+nota39
+}
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+\vspace*{50 pt}%
+{\setlength{\parindent}{0pt} \raggedright \normalfont
+\bfseries\Huge
+\ifnum \value{secnumdepth}>1 
+   \if@mainmatter\thechapter.\ \fi%
+\fi
+#1\par\nobreak\vspace{40 pt}}}
+\makeatother
+\begin{document}
+\frontespizio
+\end{document}
